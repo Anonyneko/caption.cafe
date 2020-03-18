@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: captiondb
+      POSTGRES_DB: captiondb
+      POSTGRES_PASSWORD: captiondb
+    ports:
+      - 8080:8080
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_USER: captiondb
+      POSTGRES_DB: captiondb
+      POSTGRES_PASSWORD: captiondb
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8082:8080
+volumes:
+  dbdata:
