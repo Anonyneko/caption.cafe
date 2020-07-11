@@ -8,10 +8,14 @@ services:
       POSTGRES_USER: captiondb
       POSTGRES_DB: captiondb
       POSTGRES_PASSWORD: captiondb
+      DEFAULT_ADMIN_EMAIL: admin@captiondb.com
+      DEFAULT_ADMIN_PASSWORD: dontUseThisInProd
     ports:
       - 8080:8080
   db:
     image: postgres:alpine
+    ports:
+      - "5432:5432"
     restart: always
     environment:
       POSTGRES_USER: captiondb
